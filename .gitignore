@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # password
-src/password.js
+client/src/password.js
