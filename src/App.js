@@ -12,8 +12,8 @@ import OrderDetails from "./views/OrderDtails";
 import Order from "./views/Oreder";
 import Member from "./views/Member";
 import ContactMe from "./views/ContactMe";
-import { Route, Switch } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   App: {
@@ -24,25 +24,54 @@ const useStyles = makeStyles(() => ({
 }));
 
 function App() {
+  console.log("app init");
   const classes = useStyles();
   return (
-    <div className={classes.App}>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/search" component={Search} />
-        <Route path="/detail" component={Detail} />
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={LogIn} />
-        <Route path="/booking" component={Booking} />
-        <Route path="/orders" component={Order} />
-        <Route path="/orderdetails" component={OrderDetails} />
-        <Route path="/completed" component={Completed} />
-        <Route path="/modifiedpassword" component={ModifiedPassword} />
-        <Route path="/forgotpassword" component={ForgotPassword} />
-        <Route path="/member" component={Member} />
-        <Route path="/contactme" component={ContactMe} />
-      </Switch>
-    </div>
+    <Router>
+      <div className={classes.App}>
+        <Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+          <Route path="/search">
+            <Search />
+          </Route>
+          <Route path="/detail">
+            <Detail />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/login">
+            <LogIn />
+          </Route>
+          <Route path="/booking">
+            <Booking />
+          </Route>
+          <Route path="/orders">
+            <Order />
+          </Route>
+          <Route path="/orderdetails">
+            <OrderDetails />
+          </Route>
+          <Route path="/completed">
+            <Completed />
+          </Route>
+          <Route path="/modifiedpassword">
+            <ModifiedPassword />
+          </Route>
+          <Route path="/forgotpassword">
+            <ForgotPassword />
+          </Route>
+          <Route path="/member">
+            <Member />
+          </Route>
+          <Route path="/contactme">
+            <ContactMe />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
