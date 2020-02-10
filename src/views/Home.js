@@ -16,6 +16,7 @@ import Rice from "../images/rice.jpg";
 import Noddles from "../images/noodles.jpg";
 import Dessert from "../images/dessert.jpg";
 import Beverage from "../images/beverage.jpg";
+import config from "../config";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -247,7 +248,7 @@ function Home() {
                       onClick={() => handleClickRestaurant(result._id, result.name)}
                     >
                       <Card className={categoryClasses.card}>
-                        <img src={result.image_path.main} alt="" />
+                        <img src={`${config.Serverdomain}/${result.image_path.main}`} alt="" />
                       </Card>
                       <Grid item xs={12} className={classes.guessItem}>
                         <span className={classes.restaurantName}>{result.name}</span>
