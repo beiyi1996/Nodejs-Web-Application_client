@@ -13,7 +13,7 @@ import Footer from "./Footer";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { googleMapKey } from "../googleMapKey";
+import { googleMapKey } from "../googleMapKey.js";
 import classNames from "classnames";
 import Header from "./Header";
 import Marker from "../images/marker.png";
