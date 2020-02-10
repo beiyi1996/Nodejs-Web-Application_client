@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/f0d51142-e389-4821-aec2-b67e0fdeb9c8/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/winniexpressAppClient",
+    "appService.deploySubpath": ""
+}
