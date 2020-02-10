@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import productService from "../services/productService";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/button";
+import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Footer from "./Footer";

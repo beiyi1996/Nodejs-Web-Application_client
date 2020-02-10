@@ -5,7 +5,7 @@ import productService from "../services/productService";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import { Button } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import clsx from "clsx";
 import InputLabel from "@material-ui/core/InputLabel";

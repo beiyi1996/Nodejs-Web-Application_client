@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
+import { Button } from "@material-ui/core";
 import Header from "./Header";
 import Logo from "../images/logo.png";
 

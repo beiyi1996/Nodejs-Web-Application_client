@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import productService from "../services/productService";
 import { useHistory } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+import { Button } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import { makeStyles, createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
