@@ -30,7 +30,7 @@ function App() {
     <Router>
       <div className={classes.App}>
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
           <Route path="/search">
