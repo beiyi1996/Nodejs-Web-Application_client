@@ -118,7 +118,11 @@ const useStyles = makeStyles(theme => ({
   },
   restaurants: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+
+    "@media screen and (min-width:980px)": {
+      flexWrap: "nowrap"
+    }
   },
   footerDiv: {
     position: "absolute",
@@ -133,7 +137,10 @@ const useStyles = makeStyles(theme => ({
 const categoryStyles = makeStyles({
   randomBlock: {
     display: "flex",
-    overflowX: "auto"
+    overflowX: "auto",
+    "@media screen and (min-width:980px)": {
+      flexWrap: "wrap"
+    }
   },
   div: {
     padding: "10px 5px 10px",
@@ -144,6 +151,9 @@ const categoryStyles = makeStyles({
         opacity: 0.6,
         transition: ".3s ease-in-out"
       }
+    },
+    "@media screen and (min-width:980px)": {
+      width: "calc(100% / 5 - 5px)"
     }
   },
   badge: {
@@ -209,7 +219,7 @@ function Home() {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container>
       <div className={classes.root}>
         <CssBaseline />
         <Header />

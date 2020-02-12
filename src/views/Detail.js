@@ -34,8 +34,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     position: "relative",
     height: "100vh",
-    overflow: "scroll",
-    width: 600
+    overflow: "scroll"
   },
   grid: {
     width: "100%",
@@ -94,10 +93,18 @@ const useStyles = makeStyles(theme => ({
     margin: "0 0 5px",
     color: "#3D405B"
   },
+  restaurantContent: {
+    paddingBottom: 55
+  },
   paperGrid: {
     position: "relative",
-    marginBottom: 50,
-    padding: "0 20px"
+    padding: "0 20px",
+    "@media screen and (min-width:768px)": {
+      display: "flex",
+      "& > div": {
+        width: "50%"
+      }
+    }
   },
   paperRoot: {
     minHeight: 70,
@@ -133,7 +140,10 @@ const useStyles = makeStyles(theme => ({
   },
   map: {
     height: "30vh",
-    width: "100%"
+    width: "100%",
+    "@media screen and (min-width:768px)": {
+      height: "100%"
+    }
   },
   paperFooter: {
     display: "flex",
@@ -410,7 +420,7 @@ function Detail() {
   };
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
+    <Container maxWidth="lg" className={classes.root}>
       <Grid item xs={12} className={classes.container}>
         <Header />
         <Grid item xs={12} className={classes.grid}>
@@ -436,52 +446,54 @@ function Detail() {
             {form ? form.name : queryName}
           </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} className={classes.restaurantContent}>
           <Grid item xs={12} className={classes.paperGrid}>
-            <div className={classes.restaurantImage}>
-              {form ? <SimpleSlider image_path={form.image_path} /> : <></>}
+            <div>
+              <div className={classes.restaurantImage}>
+                {form ? <SimpleSlider image_path={form.image_path} /> : <></>}
+              </div>
+              <Paper className={classes.paperRoot}>
+                <ul className={classes.detailList}>
+                  <li>
+                    <span className={classes.title}>店家名稱 : </span>
+                    <span className={classes.content}>{form ? form.name : ""}</span>
+                  </li>
+                  <li>
+                    <span className={classes.title}>地址 : </span>
+                    <span className={classes.content}>{form ? form.address : ""}</span>
+                  </li>
+                  <li>
+                    <span className={classes.title}>電話 : </span>
+                    <span className={classes.content}>{form ? form.phone : ""}</span>
+                  </li>
+                  <li>
+                    <span className={classes.title}>用餐時間 : </span>
+                    <span className={classes.content}>10:00 – 21:30</span>
+                  </li>
+                  <li>
+                    <span className={classes.title}>店家描述 : </span>
+                    <span className={classes.content}>{form ? form.info : ""}</span>
+                  </li>
+                  <li>
+                    <span className={classes.title}>保留資訊 : </span>
+                    <span className={classes.content}>將為您保留訂位10分鐘, 若10分鐘過後仍未到場, 即取消訂位!</span>
+                  </li>
+                  <li>
+                    <span className={classes.title}>最低消費 : </span>
+                    <span className={classes.content}>每位顧客最低消費為180元。</span>
+                  </li>
+                </ul>
+              </Paper>
             </div>
-            <Paper className={classes.paperRoot}>
-              <ul className={classes.detailList}>
-                <li>
-                  <span className={classes.title}>店家名稱 : </span>
-                  <span className={classes.content}>{form ? form.name : ""}</span>
-                </li>
-                <li>
-                  <span className={classes.title}>地址 : </span>
-                  <span className={classes.content}>{form ? form.address : ""}</span>
-                </li>
-                <li>
-                  <span className={classes.title}>電話 : </span>
-                  <span className={classes.content}>{form ? form.phone : ""}</span>
-                </li>
-                <li>
-                  <span className={classes.title}>用餐時間 : </span>
-                  <span className={classes.content}>10:00 – 21:30</span>
-                </li>
-                <li>
-                  <span className={classes.title}>店家描述 : </span>
-                  <span className={classes.content}>{form ? form.info : ""}</span>
-                </li>
-                <li>
-                  <span className={classes.title}>保留資訊 : </span>
-                  <span className={classes.content}>將為您保留訂位10分鐘, 若10分鐘過後仍未到場, 即取消訂位!</span>
-                </li>
-                <li>
-                  <span className={classes.title}>最低消費 : </span>
-                  <span className={classes.content}>每位顧客最低消費為180元。</span>
-                </li>
-              </ul>
-              <div className={classes.googleMap} id="map">
-                {MemoMap}
-              </div>
-              <div className={classes.paperFooter}>
-                <Link to={`/booking?restaurantName=${restaurantName}`}>
-                  <Button className={classes.booking}>我要訂位</Button>
-                </Link>
-              </div>
-            </Paper>
+            <div className={classes.googleMap} id="map">
+              {MemoMap}
+            </div>
           </Grid>
+          <div className={classes.paperFooter}>
+            <Link to={`/booking?restaurantName=${restaurantName}`}>
+              <Button className={classes.booking}>我要訂位</Button>
+            </Link>
+          </div>
         </Grid>
       </Grid>
       <div className={classes.footerDiv}>
