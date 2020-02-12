@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 import Footer from "./Footer";
 import Header from "./Header";
+import Config from "../config";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -218,7 +219,6 @@ function Search() {
   const history = useHistory();
   const url_params = new URLSearchParams(window.location.search);
   const keyWord = url_params.get("searchKeyWord");
-  let fetching = function() {};
   useEffect(() => {
     if (!restaurant) {
       getRestaurant();
@@ -233,11 +233,12 @@ function Search() {
   }, [keyWord]);
 
   useEffect(() => {
+    let fetching = function() {};
     console.log("監聽 searchkeyword is working!!");
     if (searchKeyWord) {
       console.log(12345, "search key word is changing!", searchKeyWord);
       fetching = async () => {
-        let res = await productService.searchByKeyWord(searchKeyWord);
+        const res = await productService.searchByKeyWord(searchKeyWord);
         console.log(123, res, res.restaurants.length);
         if (res.restaurants.length > 0) {
           console.log("res 有資料");
@@ -332,7 +333,7 @@ function Search() {
             restaurant.map(item => (
               <Grid item xs={12} className={classes.paperGrid} key={item._id}>
                 <div className={classes.restaurantImage}>
-                  <img src={item.image_path.main} alt="" />
+                  <img src={`${Config.Serverdomain}/${item.image_path.main}`} alt="" />
                 </div>
                 <Paper className={classes.paperRoot}>
                   <p className={classes.restaurantName}>{item.name}</p>

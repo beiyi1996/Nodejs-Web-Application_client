@@ -17,6 +17,7 @@ import { googleMapKey } from "../googleMapKey.js";
 import classNames from "classnames";
 import Header from "./Header";
 import Marker from "../images/marker.png";
+import Config from "../config";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -278,12 +279,12 @@ function Detail() {
     return (
       <Slider {...settings} className={classes.slider}>
         <div className={classes.restaurantImage}>
-          <img src={image_path.main} alt="" />
+          <img src={`${Config.Serverdomain}/${image_path.main}`} alt="" />
         </div>
         {image_path.products.map((item, idx) => {
           return (
             <div className={classes.restaurantImage} key={idx}>
-              <img src={item} alt="" />
+              <img src={`${Config.Serverdomain}/${item}`} alt="" />
             </div>
           );
         })}
