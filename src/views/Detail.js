@@ -18,6 +18,7 @@ import classNames from "classnames";
 import Header from "./Header";
 import Marker from "../images/marker.png";
 import Config from "../config";
+import LazyLoad from "react-lazyload";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -279,12 +280,16 @@ function Detail() {
     return (
       <Slider {...settings} className={classes.slider}>
         <div className={classes.restaurantImage}>
-          <img src={`${Config.Serverdomain}/${image_path.main}`} alt="" />
+          <LazyLoad>
+            <img src={`${Config.Serverdomain}/${image_path.main}`} alt="" />
+          </LazyLoad>
         </div>
         {image_path.products.map((item, idx) => {
           return (
             <div className={classes.restaurantImage} key={idx}>
-              <img src={`${Config.Serverdomain}/${item}`} alt="" />
+              <LazyLoad>
+                <img src={`${Config.Serverdomain}/${item}`} alt="" />
+              </LazyLoad>
             </div>
           );
         })}
