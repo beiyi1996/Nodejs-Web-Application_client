@@ -17,6 +17,7 @@ import Noddles from "../images/noodles.jpg";
 import Dessert from "../images/dessert.jpg";
 import Beverage from "../images/beverage.jpg";
 import config from "../config";
+import LazyLoad from "react-lazyload";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -220,9 +221,11 @@ function Home() {
                   <Grid item xs={6} className={classes.item} key={idx}>
                     <Card className={classes.card}>
                       <CardContent className={classes.cardContent}>
-                        <Typography variant="body2" component="p">
-                          <img src={compaireKindComponent(kind)} alt="" className={classes.img} />
-                        </Typography>
+                        <LazyLoad height={200}>
+                          <Typography variant="body2" component="p">
+                            <img src={compaireKindComponent(kind)} alt="" className={classes.img} />
+                          </Typography>
+                        </LazyLoad>
                         <Link to={`/search?searchKeyWord=${kind}`} className={classes.cardActions}>
                           <Button size="small">{kind}</Button>
                         </Link>
@@ -248,7 +251,9 @@ function Home() {
                       onClick={() => handleClickRestaurant(result._id, result.name)}
                     >
                       <Card className={categoryClasses.card}>
-                        <img src={`${config.Serverdomain}/${result.image_path.main}`} alt="" />
+                        <LazyLoad>
+                          <img src={`${config.Serverdomain}/${result.image_path.main}`} alt="" />
+                        </LazyLoad>
                       </Card>
                       <Grid item xs={12} className={classes.guessItem}>
                         <span className={classes.restaurantName}>{result.name}</span>

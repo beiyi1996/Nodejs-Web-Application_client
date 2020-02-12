@@ -14,6 +14,7 @@ import Chip from "@material-ui/core/Chip";
 import Footer from "./Footer";
 import Header from "./Header";
 import Config from "../config";
+import LazyLoad from "react-lazyload";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -333,7 +334,9 @@ function Search() {
             restaurant.map(item => (
               <Grid item xs={12} className={classes.paperGrid} key={item._id}>
                 <div className={classes.restaurantImage}>
-                  <img src={`${Config.Serverdomain}/${item.image_path.main}`} alt="" />
+                  <LazyLoad>
+                    <img src={`${Config.Serverdomain}/${item.image_path.main}`} alt="" />
+                  </LazyLoad>
                 </div>
                 <Paper className={classes.paperRoot}>
                   <p className={classes.restaurantName}>{item.name}</p>
