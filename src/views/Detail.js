@@ -78,7 +78,10 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 10,
     "& > img": {
       width: "100%",
-      height: 200
+      height: 200,
+      "@media screen and (min-width:768px)": {
+        height: 300
+      }
     }
   },
   restaurantName: {
