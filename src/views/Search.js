@@ -27,8 +27,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     position: "relative",
     height: "100vh",
-    overflow: "scroll",
-    width: 600
+    overflow: "scroll"
   },
   grid: {
     width: "100%",
@@ -303,7 +302,7 @@ function Search() {
   };
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
+    <Container maxWidth={"lg"} className={classes.root}>
       <Grid item xs={12} className={classes.container}>
         <Header />
         <Grid item xs={12} className={classes.grid}>
