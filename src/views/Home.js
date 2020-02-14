@@ -182,13 +182,12 @@ function Home() {
   const classes = useStyles();
   const categoryClasses = categoryStyles();
   const history = useHistory();
-  const kindEnglishName = [Rice, Noddles, Dessert, Beverage];
 
   useEffect(() => {
     if (!restaurant) {
       getRestaurant();
     }
-  }, []);
+  }, [restaurant]);
 
   const compaireKindComponent = str => {
     switch (str) {

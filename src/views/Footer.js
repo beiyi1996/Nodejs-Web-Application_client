@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles, createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import BottomNavigation from "@material-ui/core/BottomNavigation";

@@ -13,7 +13,7 @@ import Order from "./views/Oreder";
 import Member from "./views/Member";
 import ContactMe from "./views/ContactMe";
 import { makeStyles } from "@material-ui/core/styles";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   App: {

@@ -92,10 +92,6 @@ const useStyles = makeStyles(theme => ({
 function ContactMe() {
   const classes = useStyles();
 
-  const handleClickEmailButton = () => {
-    console.log("clicked email button");
-  };
-
   const handleClickGitHubButton = () => {
     console.log("clicked github button");
   };
@@ -123,12 +119,12 @@ function ContactMe() {
                   <EmailRoundedIcon />
                 </a>
               </IconButton>
-              <IconButton aria-label="email" onClick={handleClickGitHubButton}>
+              <IconButton aria-label="github" onClick={handleClickGitHubButton}>
                 <a href="https://github.com/beiyi1996" className={classes.aTagIcon}>
                   <img src={GithubIcon} alt="" className={classes.iconImg} />
                 </a>
               </IconButton>
-              <IconButton aria-label="email" onClick={handleClickCodePenButton}>
+              <IconButton aria-label="codepen" onClick={handleClickCodePenButton}>
                 <a href="https://codepen.io/beiyi1996/pens/public" className={classes.aTagIcon}>
                   <img src={CodepenIcon} alt="" className={classes.iconImg} />
                 </a>

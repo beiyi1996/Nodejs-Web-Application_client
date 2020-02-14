@@ -212,7 +212,6 @@ function Search() {
   const classes = useStyles();
   const [restaurant, setRestaurant] = useState(null);
   const [searchKeyWord, setSearchKeyWord] = useState("");
-  const [category, setCategory] = useState();
   const [searchResult, setSearchResult] = useState([]);
   const [urlParams, setURLParams] = useState("");
   const [blur, setBlur] = useState(true);
@@ -222,9 +221,8 @@ function Search() {
   useEffect(() => {
     if (!restaurant) {
       getRestaurant();
-      getAllCategory();
     }
-  }, []);
+  }, [restaurant]);
 
   useEffect(() => {
     console.log("set search key word!!");
@@ -255,11 +253,6 @@ function Search() {
     let res = await productService.searchByKeyWord(keyWord);
     console.log("111", res.restaurants);
     setRestaurant(res.restaurants);
-  };
-
-  const getAllCategory = async () => {
-    let res = await productService.getAllCatrgory();
-    setCategory(res.all_category);
   };
 
   const handleSubmit = async () => {

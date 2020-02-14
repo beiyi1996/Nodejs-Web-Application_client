@@ -154,7 +154,7 @@ function Header() {
     } else {
       setShowLogInButton(true);
     }
-  }, []);
+  }, [restaurant]);
 
   const getRestaurant = async () => {
     let res = await productService.getAll();

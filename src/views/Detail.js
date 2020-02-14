@@ -241,7 +241,6 @@ function Detail() {
   const [searchResult, setSearchResult] = useState([]);
   const [blur, setBlur] = useState(true);
   const [restaurantName, setRestaurantName] = useState("");
-  const [googleScript, setGoogleScript] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -347,7 +346,7 @@ function Detail() {
       //     console.log("in if?????");
       //   }
       // });
-    }, [options, onMount, googleScript]);
+    }, [options, onMount]);
     return <div {...{ ref, className }} />;
   }
 
