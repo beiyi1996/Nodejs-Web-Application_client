@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import productService from "../services/productService";
 import { Link, useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
@@ -137,7 +137,7 @@ function Orders() {
     setrestaurant(res);
   };
 
-  const getAllOrders = async () => {
+  const getAllOrders = useCallback(async () => {
     const user = sessionStorage.getItem("user") !== null ? JSON.parse(sessionStorage.getItem("user")) : {};
     console.log("user", user);
     const res = await productService.getAllOrders(user.member);
@@ -147,14 +147,48 @@ function Orders() {
       if (!restaurant) {
         getRestaurant();
       }
-      setOrders(res.orders);
+      const promise = res.orders.map(item => {
+        return new Promise((resolve, reject) => {
+          const formatDateTime = new Date(item.dateTime);
+          const date = `${formatDateTime.getFullYear()} / ${formatDateTime.getMonth() +
+            1} / ${formatDateTime.getDate()}`;
+          const minutes =
+            formatDateTime.getMinutes() > 9 ? formatDateTime.getMinutes() : `0${formatDateTime.getMinutes()}`;
+          const time = `${formatDateTime.getHours()} : ${minutes}`;
+          const createDateTime = new Date(item.create_time);
+          const createDate = `${createDateTime.getFullYear()} / ${createDateTime.getMonth() +
+            1} / ${createDateTime.getDate()}`;
+          const createMinutes =
+            createDateTime.getMinutes() > 9 ? createDateTime.getMinutes() : `0${createDateTime.getMinutes()}`;
+          const createTime = `${createDateTime.getHours()} : ${createMinutes}`;
+          const restaurantNamePromise = new Promise((resolve, reject) => {
+            const restaurantNameResult = productService.getRestaurantName(item.restaurant_id);
+            resolve(restaurantNameResult);
+          });
+          restaurantNamePromise.then(value => {
+            console.log("order page getAllOrders restaurantNamePromise value", value.restaurantName);
+            item.restaurantName = value.restaurantName;
+            item.date = date;
+            item.time = time;
+            item.createDate = createDate;
+            item.createTime = createTime;
+            console.log("item", item);
+            resolve(item);
+          });
+        });
+      });
+
+      Promise.all(promise).then(results => {
+        console.log("orders promise results", results);
+        setOrders(results);
+      });
     } else {
       setIsLogIn(false);
       alert("請先登入, 即可查看訂單! 謝謝!");
       sessionStorage.clear();
       history.push("/login");
     }
-  };
+  });
 
   useEffect(() => {
     console.log("Orders page useEffect is working!!");
@@ -189,18 +223,6 @@ function Orders() {
           <main className={classes.content}>
             {orders.length !== 0 ? (
               orders.map(item => {
-                const formatDateTime = new Date(item.dateTime);
-                const date = `${formatDateTime.getFullYear()} / ${formatDateTime.getMonth() +
-                  1} / ${formatDateTime.getDate()}`;
-                const minutes =
-                  formatDateTime.getMinutes() > 9 ? formatDateTime.getMinutes() : `0${formatDateTime.getMinutes()}`;
-                const time = `${formatDateTime.getHours()} : ${minutes}`;
-                const createDateTime = new Date(item.create_time);
-                const createDate = `${createDateTime.getFullYear()} / ${createDateTime.getMonth() +
-                  1} / ${createDateTime.getDate()}`;
-                const createMinutes =
-                  createDateTime.getMinutes() > 9 ? createDateTime.getMinutes() : `0${createDateTime.getMinutes()}`;
-                const createTime = `${createDateTime.getHours()} : ${createMinutes}`;
                 return (
                   <Grid item xs={12} className={classes.orderContent} key={item.create_time}>
                     <Typography className={classes.orderTitle}>
@@ -210,16 +232,19 @@ function Orders() {
                     <Typography className={classes.orderTitle}>
                       <span>成立訂單 : </span>
                       <span>
-                        {createDate} - {createTime}
+                        {item.createDate} - {item.createTime}
                       </span>
                     </Typography>
                     <Card className={classes.card}>
                       <ul className={classes.orderDetail}>
                         <li>
-                          日期 : <span>{date}</span>
+                          餐廳名稱 : <span>{item.restaurantName}</span>
                         </li>
                         <li>
-                          時間 : <span>{time}</span>
+                          日期 : <span>{item.date}</span>
+                        </li>
+                        <li>
+                          時間 : <span>{item.time}</span>
                         </li>
                         <li>
                           人數 :{" "}
