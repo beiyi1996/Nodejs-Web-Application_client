@@ -154,6 +154,7 @@ function Register() {
   const [checkPasswordError, setPasswordError] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
+  const [emailErrorMsg, setEmailErrorMsg] = useState("請填寫有效信箱! (simple@example.com)");
   const history = useHistory();
 
   const handleRedioChange = event => {
@@ -227,6 +228,9 @@ function Register() {
           console.log("item", item);
           switch (item.param) {
             case "email":
+              if (item.msg === "E-mail already in use") {
+                setEmailErrorMsg("您的電子信箱已存在, 請嘗試其他信箱或至登入頁點選忘記密碼功能鈕!!");
+              }
               setEmailError(true);
               break;
             case "password":
@@ -267,7 +271,7 @@ function Register() {
               <FormHelperText
                 className={clsx(classes.input, classes.errorText, { [classes.hide]: emailError === false })}
               >
-                請填寫有效信箱! (simple@example.com)
+                {emailErrorMsg}
               </FormHelperText>
             </FormControl>
             <FormControl className={clsx(classes.margin, classes.textField, classes.input)}>
