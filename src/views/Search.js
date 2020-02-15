@@ -222,7 +222,7 @@ function Search() {
     if (!restaurant) {
       getRestaurant();
     }
-  }, [restaurant]);
+  }, []);
 
   useEffect(() => {
     console.log("set search key word!!");
