@@ -30,10 +30,12 @@ const theme = createMuiTheme({
 const useStyles = makeStyles(theme => ({
   container: {
     textAlign: "center",
-    height: "100vh",
-    boxShadow: "1px 5px 15px 0px #DBDCE1",
+    height: "100%",
     "@media screen and (max-width:360px)": {
       height: "100%"
+    },
+    "@media screen and (min-width: 600px)": {
+      boxShadow: "1px 5px 15px 0px #DBDCE1"
     }
   },
   logo: {

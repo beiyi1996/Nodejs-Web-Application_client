@@ -31,14 +31,14 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     position: "relative",
-    height: "100vh",
+    height: "100%",
     maxWidth: 600,
     boxShadow: "1px 5px 15px 0px #DBDCE1",
     overflow: "hidden"
   },
   grid: {
     position: "relative",
-    height: "100vh",
+    height: "100%",
     maxWidth: 600
   },
   card: {
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    height: "100vh",
+    height: "100%",
     overflow: "scroll",
     paddingBottom: 130
     // marginLeft: -drawerWidth

@@ -16,9 +16,24 @@ import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
+  "@global": {
+    html: {
+      height: "100%"
+    },
+    body: {
+      margin: "0",
+      padding: "0",
+      height: "100%",
+      "& > #root": {
+        height: "100%"
+      }
+    }
+  },
   App: {
+    height: "100%",
     "& > div": {
-      padding: 0
+      padding: 0,
+      height: "100%"
     }
   }
 }));

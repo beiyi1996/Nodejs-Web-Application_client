@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   root: {
-    height: "100vh",
+    height: "100%",
     boxShadow: "1px 5px 15px 0px #DBDCE1",
     position: "relative",
     overflow: "hidden"

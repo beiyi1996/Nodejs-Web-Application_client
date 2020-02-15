@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     paddingBottom: 30,
     position: "relative",
-    height: "100vh",
+    height: "100%",
     boxShadow: "1px 5px 15px 0px #DBDCE1",
     textAlign: "center",
     overflow: "hidden"

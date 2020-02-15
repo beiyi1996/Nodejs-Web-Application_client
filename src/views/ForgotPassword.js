@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     boxShadow: "1px 5px 15px 0px #DBDCE1",
-    height: "100vh"
+    height: "100%"
   },
   container: {
     textAlign: "center"

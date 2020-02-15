@@ -10,7 +10,9 @@ import Logo from "../images/logo.png";
 
 const useStyles = makeStyles(theme => ({
   container: {
-    fontFamily: "Microsoft JhengHei"
+    fontFamily: "Microsoft JhengHei",
+    boxShadow: "1px 5px 15px 0px #DBDCE1",
+    height: "100%"
   },
   paper: {
     padding: theme.spacing(2),
@@ -19,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {},
   paperText: {
-    textAlign: "left",
+    textAlign: "center",
     boxShadow: "none",
     margin: "0 auto",
     width: "50%"
@@ -52,7 +54,7 @@ function Completed() {
   }, []);
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       <Grid item xs={12} className={classes.container}>
         <Header />
         <Grid item xs={12} className={classes.paper}>

@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     textAlign: "center",
-    height: "100vh",
+    height: "100%",
     position: "relative",
     "& > *": {
       color: "#3D405B"
