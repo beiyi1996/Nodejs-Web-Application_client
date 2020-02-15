@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     paddingBottom: 30,
-    maxWidth: 600,
     height: "100vh",
     position: "relative",
     boxShadow: "1px 5px 15px 0px #DBDCE1",
@@ -59,19 +58,30 @@ const useStyles = makeStyles(theme => ({
   paperGrid: {
     position: "relative",
     marginBottom: 20,
-    padding: "0 20px"
+    padding: "0 20px",
+    "@media screen and (min-width:700px)": {
+      display: "flex",
+      justifyContent: "space-between"
+    }
   },
   paperRoot: {
     minHeight: 70,
     padding: 5,
     borderRadius: 4,
-    marginTop: 10
+    "@media screen and (min-width:700px)": {
+      marginTop: 10,
+      display: "flex",
+      flex: 1
+    }
   },
   detailList: {
     listStyle: "none",
     padding: "0 10px",
     fontFamily: "Microsoft JhengHei",
 
+    "@media screen and (min-width:700px)": {
+      width: "100%"
+    },
     "& > li": {
       margin: "5px 0",
       padding: "0 10px",
@@ -95,14 +105,24 @@ const useStyles = makeStyles(theme => ({
   card: {
     minWidth: 275,
     marginTop: 15,
-    backgroundColor: "#F7F4E7"
+    backgroundColor: "#F7F4E7",
+    "@media screen and (min-width:700px)": {
+      display: "flex",
+      marginLeft: 20
+    },
+    "@media screen and (min-width: 980px)": {
+      flexGrow: 1
+    }
   },
   pos: {
     marginBottom: 5,
     color: "#606278",
     fontFamily: "Microsoft JhengHei",
     paddingLeft: 25,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    "@media screen and (min-width:700px)": {
+      position: "relative"
+    }
   },
   textArea: {
     resize: "none",
@@ -176,14 +196,21 @@ const useStyles = makeStyles(theme => ({
   calendarIcon: {
     position: "absolute",
     left: 30,
-    color: "#7FABAB"
+    color: "#7FABAB",
+    "@media screen and (min-width:700px)": {
+      left: 0
+    }
   },
   orderDetail: {
     paddingLeft: 15,
     listStyleType: "circle",
     "& > li": {
       fontSize: 14,
-      fontFamily: "Microsoft JhengHei"
+      fontFamily: "Microsoft JhengHei",
+      "@media screen and (min-width: 700px)": {
+        fontSize: 16,
+        lineHeight: "35px"
+      }
     }
   },
   calendarGrid: {
@@ -662,7 +689,7 @@ function Booking() {
   };
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
+    <Container maxWidth="lg" className={classes.root}>
       <Grid item xs={12} className={classes.container}>
         <Header />
         <Grid item xs={12}>
@@ -773,13 +800,13 @@ function Booking() {
                 </ul>
               </CardContent>
             </Card>
-            <div className={classes.paperFooter}>
-              <Button className={classes.booking} onClick={() => onSubmit()}>
-                確認訂位
-              </Button>
-            </div>
           </Grid>
         </Grid>
+        <div className={classes.paperFooter}>
+          <Button className={classes.booking} onClick={() => onSubmit()}>
+            確認訂位
+          </Button>
+        </div>
       </Grid>
       <div className={classes.footerDiv}>
         <Footer />
