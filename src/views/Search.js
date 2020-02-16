@@ -196,7 +196,12 @@ const useStyles = makeStyles(theme => ({
   },
   searchNoResult: {
     padding: 10,
-    fontFamily: "Microsoft JhengHei"
+    fontFamily: "Microsoft JhengHei",
+    background: "#F9F7ED",
+    textAlign: "center",
+    width: "80%",
+    margin: "20px auto",
+    color: "#E07A5F"
   },
   footerDiv: {
     position: "absolute",
@@ -256,11 +261,15 @@ function Search() {
   };
 
   const handleSubmit = async () => {
-    let res = await productService.searchByKeyWord(searchKeyWord);
-    setURLParams(searchKeyWord);
-    setRestaurant(res.restaurants);
-    setBlur(true);
-    history.push(`/search?searchKeyWord=${searchKeyWord}`);
+    if (searchKeyWord.length > 0) {
+      let res = await productService.searchByKeyWord(searchKeyWord);
+      setURLParams(searchKeyWord);
+      setRestaurant(res.restaurants);
+      setBlur(true);
+      history.push(`/search?searchKeyWord=${searchKeyWord}`);
+    } else {
+      alert("請輸入餐廳名稱或類別喲!!");
+    }
   };
 
   const handleChange = e => {
@@ -295,7 +304,7 @@ function Search() {
   };
 
   return (
-    <Container maxWidth={"lg"} className={classes.root}>
+    <Container maxWidth="lg" className={classes.root}>
       <Grid item xs={12} className={classes.container}>
         <Header />
         <Grid item xs={12} className={classes.grid}>
@@ -345,7 +354,7 @@ function Search() {
               </Grid>
             ))
           ) : (
-            <p className={classes.searchNoResult}>今天吃點別的吧!!!</p>
+            <h2 className={classes.searchNoResult}>今天吃點別的吧!!!</h2>
           )}
         </Grid>
       </Grid>
