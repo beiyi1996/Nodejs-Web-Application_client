@@ -223,6 +223,15 @@ const useStyles = makeStyles(theme => ({
       cursor: "default"
     }
   },
+  noFetchResult: {
+    padding: 20,
+    backgroundColor: "#F9F7ED",
+    fontFamily: "Microsoft JhengHei",
+    color: "#E07A5F",
+    margin: "0 auto",
+    width: "80%",
+    textAlign: "center"
+  },
   footerDiv: {
     position: "absolute",
     bottom: 0,
@@ -241,6 +250,7 @@ function Detail() {
   const [searchResult, setSearchResult] = useState([]);
   const [blur, setBlur] = useState(true);
   const [restaurantName, setRestaurantName] = useState("");
+  const [noFetchResult, setNoFetchResult] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -267,16 +277,21 @@ function Detail() {
     console.log("res", res);
     setRestaurantName(name);
     setQueryName(name);
-    setForm({
-      name: name,
-      address: res.restaurant.address,
-      phone: res.restaurant.phone,
-      info: res.restaurant.info,
-      image_path: res.restaurant.image_path
-    });
+    if (res.code === 200) {
+      setForm({
+        name: name,
+        address: res.restaurant.address,
+        phone: res.restaurant.phone,
+        info: res.restaurant.info,
+        image_path: res.restaurant.image_path
+      });
+    } else if (res.code === 400) {
+      console.log(400);
+      setForm(null);
+    }
 
     console.log("[getRestaurantDetail]取得資料結束", res);
-    return res.restaurant;
+    return res;
   };
 
   const SimpleSlider = ({ image_path }) => {
@@ -316,14 +331,21 @@ function Detail() {
       const onLoad = async () => {
         if (!form) {
           const restaurantResult = await getRestaurantDetail();
-          const map = new window.google.maps.Map(ref.current, options);
-          onMount && onMount(map, restaurantResult.address);
+          console.log("restaurantResult", restaurantResult);
+          if (restaurantResult.code === 200) {
+            setNoFetchResult(false);
+            const map = new window.google.maps.Map(ref.current, options);
+            onMount && onMount(map, restaurantResult.restaurant.address);
+          } else {
+            console.log("因為資料有誤, 所以顯示h3!");
+            setNoFetchResult(true);
+            return;
+          }
           script.removeEventListener(`load`, onLoad);
         }
       };
 
       const script = document.createElement(`script`);
-      // const scriptPromise = new Promise((resolve, reject) => {
       if (!window.google) {
         document.body.append(script);
         script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapKey}`;
@@ -331,21 +353,11 @@ function Detail() {
         script.defer = true;
         script.addEventListener(`load`, () => {
           onLoad();
-          // resolve(true);
         });
       } else {
         console.log("google map script is exist!");
-        // resolve(true);
         onLoad();
       }
-      // });
-
-      // scriptPromise.then(value => {
-      //   console.log("google map script is appended!", value);
-      //   if (value) {
-      //     console.log("in if?????");
-      //   }
-      // });
     }, [options, onMount]);
     return <div {...{ ref, className }} />;
   }
@@ -443,60 +455,68 @@ function Detail() {
         <Grid item xs={12} className={classes.searchResultGrid}>
           {renderSearchResult()}
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom className={classes.restaurantName}>
-            {form ? form.name : queryName}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} className={classes.restaurantContent}>
-          <Grid item xs={12} className={classes.paperGrid}>
-            <div>
-              <div className={classes.restaurantImage}>
-                {form ? <SimpleSlider image_path={form.image_path} /> : <></>}
+        {noFetchResult ? (
+          <h3 className={classes.noFetchResult}>
+            很抱歉, 沒有您想要吃的餐廳!! 可以在左邊選選取您有興趣的餐廳種類喲!!!
+          </h3>
+        ) : (
+          <>
+            <Grid item xs={12}>
+              <Typography variant="h5" gutterBottom className={classes.restaurantName}>
+                {form ? form.name : queryName}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} className={classes.restaurantContent}>
+              <Grid item xs={12} className={classes.paperGrid}>
+                <div>
+                  <div className={classes.restaurantImage}>
+                    {form ? <SimpleSlider image_path={form.image_path} /> : <></>}
+                  </div>
+                  <Paper className={classes.paperRoot}>
+                    <ul className={classes.detailList}>
+                      <li>
+                        <span className={classes.title}>店家名稱 : </span>
+                        <span className={classes.content}>{form ? form.name : ""}</span>
+                      </li>
+                      <li>
+                        <span className={classes.title}>地址 : </span>
+                        <span className={classes.content}>{form ? form.address : ""}</span>
+                      </li>
+                      <li>
+                        <span className={classes.title}>電話 : </span>
+                        <span className={classes.content}>{form ? form.phone : ""}</span>
+                      </li>
+                      <li>
+                        <span className={classes.title}>用餐時間 : </span>
+                        <span className={classes.content}>10:00 – 21:30</span>
+                      </li>
+                      <li>
+                        <span className={classes.title}>店家描述 : </span>
+                        <span className={classes.content}>{form ? form.info : ""}</span>
+                      </li>
+                      <li>
+                        <span className={classes.title}>保留資訊 : </span>
+                        <span className={classes.content}>將為您保留訂位10分鐘, 若10分鐘過後仍未到場, 即取消訂位!</span>
+                      </li>
+                      <li>
+                        <span className={classes.title}>最低消費 : </span>
+                        <span className={classes.content}>每位顧客最低消費為180元。</span>
+                      </li>
+                    </ul>
+                  </Paper>
+                </div>
+                <div className={classes.googleMap} id="map">
+                  {MemoMap}
+                </div>
+              </Grid>
+              <div className={classes.paperFooter}>
+                <Link to={`/booking?restaurantName=${restaurantName}`}>
+                  <Button className={classes.booking}>我要訂位</Button>
+                </Link>
               </div>
-              <Paper className={classes.paperRoot}>
-                <ul className={classes.detailList}>
-                  <li>
-                    <span className={classes.title}>店家名稱 : </span>
-                    <span className={classes.content}>{form ? form.name : ""}</span>
-                  </li>
-                  <li>
-                    <span className={classes.title}>地址 : </span>
-                    <span className={classes.content}>{form ? form.address : ""}</span>
-                  </li>
-                  <li>
-                    <span className={classes.title}>電話 : </span>
-                    <span className={classes.content}>{form ? form.phone : ""}</span>
-                  </li>
-                  <li>
-                    <span className={classes.title}>用餐時間 : </span>
-                    <span className={classes.content}>10:00 – 21:30</span>
-                  </li>
-                  <li>
-                    <span className={classes.title}>店家描述 : </span>
-                    <span className={classes.content}>{form ? form.info : ""}</span>
-                  </li>
-                  <li>
-                    <span className={classes.title}>保留資訊 : </span>
-                    <span className={classes.content}>將為您保留訂位10分鐘, 若10分鐘過後仍未到場, 即取消訂位!</span>
-                  </li>
-                  <li>
-                    <span className={classes.title}>最低消費 : </span>
-                    <span className={classes.content}>每位顧客最低消費為180元。</span>
-                  </li>
-                </ul>
-              </Paper>
-            </div>
-            <div className={classes.googleMap} id="map">
-              {MemoMap}
-            </div>
-          </Grid>
-          <div className={classes.paperFooter}>
-            <Link to={`/booking?restaurantName=${restaurantName}`}>
-              <Button className={classes.booking}>我要訂位</Button>
-            </Link>
-          </div>
-        </Grid>
+            </Grid>
+          </>
+        )}
       </Grid>
       <div className={classes.footerDiv}>
         <Footer />
