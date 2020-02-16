@@ -156,7 +156,7 @@ function LogIn() {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       <Grid item xs={12} className={classes.container}>
         <Header />
         <Grid item xs={12} className={classes.logoGrid}>

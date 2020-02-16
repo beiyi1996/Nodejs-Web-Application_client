@@ -43,8 +43,10 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     height: "100%",
-    boxShadow: "1px 5px 15px 0px #DBDCE1",
-    overflow: "hidden"
+    overflow: "hidden",
+    "@media screen and (min-width: 980px)": {
+      boxShadow: "1px 5px 15px 0px #DBDCE1"
+    }
   },
   hide: {
     display: "none"
@@ -94,10 +96,18 @@ const useStyles = makeStyles(theme => ({
     padding: "0 10px",
     fontFamily: "Microsoft JhengHei",
 
+    "@media screen and (min-width: 750px)": {
+      display: "flex",
+      justifyContent: "space-around",
+      alignItems: "baseline"
+    },
     "& > li": {
       margin: "5px 0",
       padding: "0 10px",
-      position: "relative"
+      position: "relative",
+      "@media screen and (min-width: 750px)": {
+        width: "calc(100% / 4)"
+      }
     }
   },
   textArea: {
@@ -113,7 +123,11 @@ const useStyles = makeStyles(theme => ({
   label: {
     margin: "10px 0 3px",
     fontSize: 12,
-    color: "#638585"
+    color: "#638585",
+    "@media screen and (min-width: 750px)": {
+      fontSize: 13,
+      margin: 0
+    }
   },
   countContainer: {
     display: "flex",
@@ -128,7 +142,11 @@ const useStyles = makeStyles(theme => ({
   counterTitle: {
     fontSize: 14,
     width: "15%",
-    color: "#638585"
+    color: "#638585",
+    "@media screen and (min-width: 750px)": {
+      width: "20%",
+      textAlign: "center"
+    }
   },
   btnGroup: {
     width: "85%",
@@ -280,10 +298,19 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: 2,
     "&:focus": {
       borderBottom: "1px solid #9BD0D0"
+    },
+    "@media screen and (min-width: 750px)": {
+      marginTop: 14
     }
   },
   timeSelect: {
-    color: "#638585"
+    color: "#638585",
+    "@media screen and (min-width: 750px)": {
+      marginTop: 5,
+      "& ~ div": {
+        marginTop: 25
+      }
+    }
   },
   show: {
     display: "block"
@@ -632,7 +659,7 @@ function OrderDetails() {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       <div className={classes.root}>
         <CssBaseline />
         <Header />

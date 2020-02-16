@@ -32,14 +32,14 @@ const useStyles = makeStyles(theme => ({
   root: {
     position: "relative",
     height: "100%",
-    maxWidth: 600,
-    boxShadow: "1px 5px 15px 0px #DBDCE1",
-    overflow: "hidden"
+    overflow: "hidden",
+    "@media screen and (min-width: 980px)": {
+      boxShadow: "1px 5px 15px 0px #DBDCE1"
+    }
   },
   grid: {
     position: "relative",
-    height: "100%",
-    maxWidth: 600
+    height: "100%"
   },
   card: {
     width: "100%",
@@ -215,7 +215,7 @@ function Orders() {
   };
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
+    <Container maxWidth="lg" className={classes.root}>
       <Grid item xs={12} className={classes.grid}>
         <div>
           <CssBaseline />

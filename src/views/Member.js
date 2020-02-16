@@ -18,9 +18,11 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: 30,
     position: "relative",
     height: "100%",
-    boxShadow: "1px 5px 15px 0px #DBDCE1",
     textAlign: "center",
-    overflow: "hidden"
+    overflow: "hidden",
+    "@media screen and (min-width: 700px)": {
+      boxShadow: "1px 5px 15px 0px #DBDCE1"
+    }
   },
   container: {
     height: "100%"
@@ -191,7 +193,7 @@ function Member() {
   };
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
+    <Container maxWidth="lg" className={classes.root}>
       <Grid item xs={12} className={classes.container}>
         {isLogIn ? <Header /> : <></>}
         <Grid item xs={12} className={classes.userPicGrid}>
