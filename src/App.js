@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function App() {
-  console.log("app init");
+  console.log("app init!!");
   const classes = useStyles();
   return (
     <Router>
