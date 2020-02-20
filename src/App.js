@@ -11,6 +11,7 @@ import Booking from "./views/Booking";
 import OrderDetails from "./views/OrderDtails";
 import Order from "./views/Oreder";
 import Member from "./views/Member";
+import ContactMe from "./views/ContactMe";
 import NoMatch from "./views/NoMatch";
 import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -80,6 +81,9 @@ function App() {
           </Route>
           <Route path="/member">
             <Member />
+          </Route>
+          <Route path="/contactme">
+            <ContactMe />
           </Route>
           <Route path="*">
             <NoMatch />

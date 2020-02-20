@@ -135,7 +135,8 @@ function Header() {
   const history = useHistory();
   const listItem = [
     { title: "查看訂單", href: `/orders?name=${session_storage.member}` },
-    { title: "首頁", href: "/" }
+    { title: "首頁", href: "/" },
+    { title: "關於作者", href: "/contactme" }
   ];
 
   useEffect(() => {
