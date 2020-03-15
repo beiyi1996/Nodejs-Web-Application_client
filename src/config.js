@@ -1,3 +1,3 @@
 module.exports = {
-    Serverdomain: "https://winniexpressapp.azurewebsites.net"
-}
+  Serverdomain: "https://bookingsystem2020.herokuapp.com/"
+};
