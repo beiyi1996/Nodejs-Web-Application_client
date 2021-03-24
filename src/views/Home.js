@@ -1,221 +1,217 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import productService from "../services/productService";
-import { Button } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Badge from "@material-ui/core/Badge";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Header from "./Header";
-import Footer from "./Footer";
-import Rice from "../images/rice.jpg";
-import Noddles from "../images/noodles.jpg";
-import Dessert from "../images/dessert.jpg";
-import Beverage from "../images/beverage.jpg";
-import config from "../config";
-import LazyLoad from "react-lazyload";
+import React, { useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import productService from '../services/productService'
+import { Button } from '@material-ui/core'
+import Container from '@material-ui/core/Container'
+import { makeStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+import Badge from '@material-ui/core/Badge'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Header from './Header'
+import Footer from './Footer'
+import Rice from '../images/rice.jpg'
+import Noddles from '../images/noodles.jpg'
+import Dessert from '../images/dessert.jpg'
+import Beverage from '../images/beverage.jpg'
+import config from '../config'
+import LazyLoad from 'react-lazyload'
 
-const useStyles = makeStyles(theme => ({
-  "@global": {
+const useStyles = makeStyles((theme) => ({
+  '@global': {
     body: {
-      margin: "0",
-      padding: "0"
+      margin: '0',
+      padding: '0',
     },
-    "*::-webkit-scrollbar": {
-      width: "0em",
-      height: "8px"
+    '*::-webkit-scrollbar': {
+      width: '0em',
+      height: '8px',
     },
-    "*::-webkit-scrollbar-thumb": {
-      backgroundColor: "rgba(155, 208, 208, .5)",
-      outline: "1px solid slategrey",
-      borderRadius: "15px"
-    }
+    '*::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(155, 208, 208, .5)',
+      outline: '1px solid slategrey',
+      borderRadius: '15px',
+    },
   },
   root: {
-    height: "100%",
-    boxShadow: "1px 5px 15px 0px #DBDCE1",
-    position: "relative",
-    overflow: "hidden"
+    height: '100%',
+    boxShadow: '1px 5px 15px 0px #DBDCE1',
+    position: 'relative',
+    overflow: 'hidden',
   },
   card: {
-    position: "relative"
+    position: 'relative',
   },
   cardContent: {
     padding: 0,
-    position: "relative",
-    paddingBottom: "0 !important"
+    position: 'relative',
+    paddingBottom: '0 !important',
   },
   cardActions: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
-    left: "50%",
-    transform: "translateX(-50%)",
-    textDecoration: "none",
-    width: "100%",
-    height: "100%",
+    left: '50%',
+    transform: 'translateX(-50%)',
+    textDecoration: 'none',
+    width: '100%',
+    height: '100%',
 
-    "& > button": {
-      width: "100%",
-      height: "100%",
-      "& > span": {
-        fontFamily: "Microsoft JhengHei",
-        color: "#F4F1DE",
-        fontSize: 18
+    '& > button': {
+      width: '100%',
+      height: '100%',
+      '& > span': {
+        fontFamily: 'Microsoft JhengHei',
+        color: '#F4F1DE',
+        fontSize: 18,
       },
-      "&:hover": {
-        backgroundColor: "#DBDCE1",
+      '&:hover': {
+        backgroundColor: '#DBDCE1',
         opacity: 0.6,
-        transition: ".3s ease-in-out",
-        "& > span": {
-          color: "#3D405B",
-          fontWeight: "bold"
-        }
-      }
-    }
+        transition: '.3s ease-in-out',
+        '& > span': {
+          color: '#3D405B',
+          fontWeight: 'bold',
+        },
+      },
+    },
   },
   item: {
-    padding: "10px",
-    overflow: "hidden"
+    padding: '10px',
+    overflow: 'hidden',
   },
   blockTitle: {
-    fontFamily: "Microsoft JhengHei",
-    color: "#3D405B"
+    fontFamily: 'Microsoft JhengHei',
+    color: '#3D405B',
   },
   guessItem: {
-    display: "flex",
-    justifyContent: "space-between",
-    position: "relative",
-    marginTop: "5px"
+    display: 'flex',
+    justifyContent: 'space-between',
+    position: 'relative',
+    marginTop: '5px',
   },
   img: {
-    width: "100%",
-    height: "100%"
+    width: '100%',
+    height: '100%',
   },
   restaurantName: {
-    width: "65%",
-    fontFamily: "Microsoft JhengHei",
-    color: "#3D405B",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    display: "-webkit-box",
-    "-webkit-line-clamp": "2",
-    "-webkit-box-orient": "vertical"
+    width: '65%',
+    fontFamily: 'Microsoft JhengHei',
+    color: '#3D405B',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    '-webkit-line-clamp': '2',
+    '-webkit-box-orient': 'vertical',
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(1),
-    transition: theme.transitions.create("margin", {
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
-    height: "calc(100% - 100px)",
-    overflow: "scroll"
+    height: 'calc(100% - 100px)',
+    overflow: 'scroll',
     // marginLeft: -drawerWidth
   },
   restaurants: {
-    display: "flex",
-    flexWrap: "wrap",
+    display: 'flex',
+    flexWrap: 'wrap',
 
-    "@media screen and (min-width:980px)": {
-      flexWrap: "nowrap"
-    }
+    '@media screen and (min-width:980px)': {
+      flexWrap: 'nowrap',
+    },
   },
   footerDiv: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
-    width: "100%",
-    "& > div": {
-      position: "static"
-    }
-  }
-}));
+    width: '100%',
+    '& > div': {
+      position: 'static',
+    },
+  },
+}))
 
 const categoryStyles = makeStyles({
   randomBlock: {
-    display: "flex",
-    overflowX: "auto",
-    "@media screen and (min-width:980px)": {
-      flexWrap: "wrap"
-    }
+    display: 'flex',
+    overflowX: 'auto',
+    '@media screen and (min-width:980px)': {
+      flexWrap: 'wrap',
+    },
   },
   div: {
-    padding: "10px 5px 10px",
-    "&:hover": {
-      cursor: "pointer",
-      "& > div > img": {
-        backgroundColor: "#DBDCE1",
+    padding: '10px 5px 10px',
+    '&:hover': {
+      cursor: 'pointer',
+      '& > div > img': {
+        backgroundColor: '#DBDCE1',
         opacity: 0.6,
-        transition: ".3s ease-in-out"
-      }
+        transition: '.3s ease-in-out',
+      },
     },
-    "@media screen and (min-width:980px)": {
-      width: "calc(100% / 5 - 5px)"
-    }
+    '@media screen and (min-width:980px)': {
+      width: 'calc(100% / 5 - 5px)',
+    },
   },
   badge: {
-    position: "absolute",
-    top: "12px",
-    right: "0",
-    width: "100%",
-    "& > span": {
-      backgroundColor: "#E07A5F"
+    position: 'absolute',
+    top: '12px',
+    right: '0',
+    width: '100%',
+    '& > span': {
+      backgroundColor: '#E07A5F',
     },
-    "& > span > span": {
-      fontFamily: "Microsoft JhengHei"
-    }
+    '& > span > span': {
+      fontFamily: 'Microsoft JhengHei',
+    },
   },
   card: {
-    textAlign: "center",
-    "& > img": {
+    textAlign: 'center',
+    '& > img': {
       width: 150,
-      height: 100
-    }
-  }
-});
+      height: 100,
+    },
+  },
+})
 
 function Home() {
-  const [restaurant, setrestaurant] = useState(null);
-  const classes = useStyles();
-  const categoryClasses = categoryStyles();
-  const history = useHistory();
+  const [restaurant, setrestaurant] = useState(null)
+  const classes = useStyles()
+  const categoryClasses = categoryStyles()
+  const history = useHistory()
 
   useEffect(() => {
     if (!restaurant) {
-      getRestaurant();
+      getRestaurant()
     }
-  }, [restaurant]);
+  }, [restaurant])
 
-  const compaireKindComponent = str => {
+  const compaireKindComponent = (str) => {
     switch (str) {
-      case "飯":
-        return Rice;
-      case "麵":
-        return Noddles;
-      case "甜點":
-        return Dessert;
-      case "飲料":
-        return Beverage;
+      case '飯':
+        return Rice
+      case '麵':
+        return Noddles
+      case '甜點':
+        return Dessert
+      case '飲料':
+        return Beverage
       default:
-        return "";
+        return ''
     }
-  };
+  }
 
   const getRestaurant = async () => {
-    let res = await productService.getAll();
-    console.log("app res", res);
-    setrestaurant(res);
-  };
-  console.log("restaurant", restaurant);
+    let res = await productService.getAll()
+    setrestaurant(res)
+  }
 
   const handleClickRestaurant = (_id, name) => {
-    console.log("handleClickRestaurant is working!!!");
-    // /detail?name=test2&_id=5dc3d5eb4e48673b44ec995b
-    history.push(`/detail?name=${name}&_id=${_id}`);
-  };
+    history.push(`/detail?name=${name}&_id=${_id}`)
+  }
 
   return (
     <Container>
@@ -241,7 +237,7 @@ function Home() {
                       </CardContent>
                     </Card>
                   </Grid>
-                );
+                )
               })
             ) : (
               <p>Loading...</p>
@@ -251,8 +247,7 @@ function Home() {
             <h4 className={classes.blockTitle}>猜你喜歡...</h4>
             <Grid item xs={12} className={categoryClasses.randomBlock}>
               {restaurant ? (
-                restaurant.randomRestaurants.map(result => {
-                  // console.log(12345, result);
+                restaurant.randomRestaurants.map((result) => {
                   return (
                     <div
                       key={result._id}
@@ -261,7 +256,7 @@ function Home() {
                     >
                       <Card className={categoryClasses.card}>
                         <LazyLoad>
-                          <img src={`${config.Serverdomain}/${result.image_path.main}`} alt="" />
+                          <img src={`${config.Serverdomain}${result.image_path.main}`} alt="" />
                         </LazyLoad>
                       </Card>
                       <Grid item xs={12} className={classes.guessItem}>
@@ -274,7 +269,7 @@ function Home() {
                         ></Badge>
                       </Grid>
                     </div>
-                  );
+                  )
                 })
               ) : (
                 <p>Loading...</p>
@@ -287,7 +282,7 @@ function Home() {
         </div>
       </div>
     </Container>
-  );
+  )
 }
 
-export default Home;
+export default Home

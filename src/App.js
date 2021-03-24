@@ -1,47 +1,47 @@
-import React from "react";
-import Home from "./views/Home";
-import Completed from "./views/Completed";
-import LogIn from "./views/LogIn";
-import Register from "./views/Register";
-import ModifiedPassword from "./views/ModifiedPassword";
-import ForgotPassword from "./views/ForgotPassword";
-import Search from "./views/Search";
-import Detail from "./views/Detail";
-import Booking from "./views/Booking";
-import OrderDetails from "./views/OrderDtails";
-import Order from "./views/Oreder";
-import Member from "./views/Member";
-import ContactMe from "./views/ContactMe";
-import NoMatch from "./views/NoMatch";
-import { makeStyles } from "@material-ui/core/styles";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react'
+import Home from './views/Home'
+import Completed from './views/Completed'
+import LogIn from './views/LogIn'
+import Register from './views/Register'
+import ModifiedPassword from './views/ModifiedPassword'
+import ForgotPassword from './views/ForgotPassword'
+import Search from './views/Search'
+import Detail from './views/Detail'
+import Booking from './views/Booking'
+import OrderDetails from './views/OrderDtails'
+import Order from './views/Oreder'
+import Member from './views/Member'
+import NoMatch from './views/NoMatch'
+import { makeStyles } from '@material-ui/core/styles'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 const useStyles = makeStyles(() => ({
-  "@global": {
+  '@global': {
     html: {
-      height: "100%"
+      height: '100%',
     },
     body: {
-      margin: "0",
-      padding: "0",
-      height: "100%",
-      "& > #root": {
-        height: "100%"
-      }
-    }
+      margin: '0',
+      padding: '0',
+      height: '100%',
+      '& > #root': {
+        height: '100%',
+      },
+    },
   },
   App: {
-    height: "100%",
-    "& > div": {
+    height: '100%',
+    maxWidth: 980,
+    margin: '0 auto',
+    '& > div': {
       padding: 0,
-      height: "100%"
-    }
-  }
-}));
+      height: '100%',
+    },
+  },
+}))
 
 function App() {
-  console.log("app init!!");
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <Router>
       <div className={classes.App}>
@@ -82,16 +82,13 @@ function App() {
           <Route path="/member">
             <Member />
           </Route>
-          <Route path="/contactme">
-            <ContactMe />
-          </Route>
           <Route path="*">
             <NoMatch />
           </Route>
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

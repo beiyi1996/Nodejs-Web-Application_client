@@ -1,258 +1,252 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles, withStyles, createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
-import productService from "../services/productService";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import { Button } from "@material-ui/core";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import clsx from "clsx";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Header from "./Header";
-import Logo from "../images/logo.png";
+import React, { useState, useEffect } from 'react'
+import { makeStyles, withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import { useHistory } from 'react-router-dom'
+import productService from '../services/productService'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+import { Button } from '@material-ui/core'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
+import Input from '@material-ui/core/Input'
+import clsx from 'clsx'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import IconButton from '@material-ui/core/IconButton'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import Header from './Header'
+import Logo from '../images/logo.png'
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: "#719898" }
-  }
-});
+    primary: { main: '#719898' },
+  },
+})
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
-    textAlign: "center",
-    height: "100%",
-    "@media screen and (max-width:360px)": {
-      height: "100%"
+    textAlign: 'center',
+    height: '100%',
+    '@media screen and (max-width:360px)': {
+      height: '100%',
     },
-    "@media screen and (min-width: 600px)": {
-      boxShadow: "1px 5px 15px 0px #DBDCE1"
-    }
+    '@media screen and (min-width: 600px)': {
+      boxShadow: '1px 5px 15px 0px #DBDCE1',
+    },
   },
   logo: {
     // borderRadius: "50%",
-    marginTop: 50
+    marginTop: 50,
   },
   form: {
-    "& > *": {
+    '& > *': {
       margin: theme.spacing(1),
-      width: "250px"
+      width: '250px',
     },
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column',
   },
   formGrid: {
-    width: "100%",
-    margin: "0 auto",
-    paddingTop: 10
+    width: '100%',
+    margin: '0 auto',
+    paddingTop: 10,
   },
   input: {
-    margin: "10px auto",
-    "& > div > input": {
-      color: "#3D405B"
+    margin: '10px auto',
+    '& > div > input': {
+      color: '#3D405B',
     },
-    "& > div > div > input": {
-      color: "#3D405B"
-    }
+    '& > div > div > input': {
+      color: '#3D405B',
+    },
   },
   buttonGrid: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
-    width: "40%",
-    margin: "5px 0",
-    fontFamily: "Microsoft JhengHei",
-    border: "none"
+    width: '40%',
+    margin: '5px 0',
+    fontFamily: 'Microsoft JhengHei',
+    border: 'none',
   },
   title: {
-    textAlign: "left",
-    display: "inline-block",
-    width: "25%",
-    color: "#719898"
+    textAlign: 'left',
+    display: 'inline-block',
+    width: '25%',
+    color: '#719898',
   },
   radioInput: {
-    flexDirection: "row",
-    margin: "10px auto",
-    alignItems: "center",
-    justifyContent: "space-between",
-    fontFamily: "Microsoft JhengHei"
+    flexDirection: 'row',
+    margin: '10px auto',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    fontFamily: 'Microsoft JhengHei',
   },
   radio: {
-    width: "38%",
+    width: '38%',
     marginRight: 0,
-    color: "#719898"
+    color: '#719898',
   },
   phoneLabel: {
-    marginTop: "-30px",
-    color: "#719898"
+    marginTop: '-30px',
+    color: '#719898',
   },
   phoneInput: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   phone: {
-    "& > div > input": {
-      textAlign: "center"
-    }
+    '& > div > input': {
+      textAlign: 'center',
+    },
   },
   hide: {
-    display: "none"
+    display: 'none',
   },
   errorText: {
-    color: "#E07A5F",
-    fontFamily: "Microsoft JhengHei"
+    color: '#E07A5F',
+    fontFamily: 'Microsoft JhengHei',
   },
   phoneErrorText: {
-    color: "#E07A5F",
-    lineHeight: "20px",
-    textAlign: "center",
-    marginTop: "-5px",
-    fontFamily: "Microsoft JhengHei"
-  }
-}));
+    color: '#E07A5F',
+    lineHeight: '20px',
+    textAlign: 'center',
+    marginTop: '-5px',
+    fontFamily: 'Microsoft JhengHei',
+  },
+}))
 
 const CssTextField = withStyles({
   root: {
-    "& label.Mui-focused": {
-      color: "#719898"
+    '& label.Mui-focused': {
+      color: '#719898',
     },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "#719898"
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#719898',
     },
-    "& .MuiInput-underline.Mui-error:after": {
-      borderBottomColor: "#f44336"
-    }
-  }
-})(TextField);
+    '& .MuiInput-underline.Mui-error:after': {
+      borderBottomColor: '#f44336',
+    },
+  },
+})(TextField)
 
 function Register() {
-  const classes = useStyles();
+  const classes = useStyles()
   const [phone, setPhone] = useState({
-    phone1: "",
-    phone2: "",
-    phone3: ""
-  });
+    phone1: '',
+    phone2: '',
+    phone3: '',
+  })
   const [newValues, setNewValues] = useState({
-    password: "",
-    showPassword: false
-  });
-  const [gender, setGender] = useState("female");
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [checkPasswordError, setPasswordError] = useState(false);
-  const [nameError, setNameError] = useState(false);
-  const [phoneError, setPhoneError] = useState(false);
-  const [emailErrorMsg, setEmailErrorMsg] = useState("請填寫有效信箱! (simple@example.com)");
-  const history = useHistory();
+    password: '',
+    showPassword: false,
+  })
+  const [gender, setGender] = useState('female')
+  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [emailError, setEmailError] = useState(false)
+  const [checkPasswordError, setPasswordError] = useState(false)
+  const [nameError, setNameError] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
+  const [emailErrorMsg, setEmailErrorMsg] = useState('請填寫有效信箱! (simple@example.com)')
+  const history = useHistory()
 
-  const handleRedioChange = event => {
-    setGender(event.target.value);
-  };
+  const handleRedioChange = (event) => {
+    setGender(event.target.value)
+  }
 
-  const handlePasswordChange = prop => event => {
-    setNewValues({ ...newValues, [prop]: event.target.value });
-    setPasswordError(false);
-  };
+  const handlePasswordChange = (prop) => (event) => {
+    setNewValues({ ...newValues, [prop]: event.target.value })
+    setPasswordError(false)
+  }
 
   const handleClickShowPassword = () => {
-    setNewValues({ ...newValues, showPassword: !newValues.showPassword });
-  };
+    setNewValues({ ...newValues, showPassword: !newValues.showPassword })
+  }
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault();
-  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault()
+  }
 
-  const handleChangeEmail = e => {
-    setEmail(e.target.value);
-    setEmailError(false);
-  };
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value)
+    setEmailError(false)
+  }
 
-  const handleChangeName = e => {
-    setName(e.target.value);
-    setNameError(false);
-  };
+  const handleChangeName = (e) => {
+    setName(e.target.value)
+    setNameError(false)
+  }
 
   useEffect(() => {
-    if (sessionStorage.getItem("temporarily_email")) {
-      console.log("in if???");
-      const temporarily_email = sessionStorage.getItem("temporarily_email");
-      setEmail(temporarily_email);
-    } else {
-      console.log("沒有欲註冊的暫存帳號!");
+    if (sessionStorage.getItem('temporarily_email')) {
+      const temporarily_email = sessionStorage.getItem('temporarily_email')
+      setEmail(temporarily_email)
     }
-  }, []);
+  }, [])
 
-  const handleInputRegex = e => {
-    e.target.value = e.target.value.replace(/[A-Za-z\u4e00-\u9fa5\s\D]/g, "");
-    const name = e.target.name;
-    console.log("name", name);
+  const handleInputRegex = (e) => {
+    e.target.value = e.target.value.replace(/[A-Za-z\u4e00-\u9fa5\s\D]/g, '')
+    const name = e.target.name
     setPhone({
       ...phone,
-      [name]: e.target.value
-    });
-    setPhoneError(false);
-  };
+      [name]: e.target.value,
+    })
+    setPhoneError(false)
+  }
 
   const handleRegister = async (email, password, name, gender, phone) => {
-    const genderNumber = gender === "male" ? 0 : 1;
-    const allPhone = `${phone.phone1}-${phone.phone2}-${phone.phone3}`;
-    console.log("allPhone", allPhone);
-    if (email === "" || password === "" || name === "" || genderNumber === "" || allPhone === "") {
-      alert("每個欄位都為必填欄位!! 請填寫完成再按下註冊按鈕, 謝謝!");
-      setEmailError(true);
-      setPasswordError(true);
-      setNameError(true);
-      setPhoneError(true);
+    const genderNumber = gender === 'male' ? 0 : 1
+    const allPhone = `${phone.phone1}-${phone.phone2}-${phone.phone3}`
+
+    if (email === '' || password === '' || name === '' || genderNumber === '' || allPhone === '') {
+      alert('每個欄位都為必填欄位! 請填寫完成再按下註冊按鈕。')
+      setEmailError(true)
+      setPasswordError(true)
+      setNameError(true)
+      setPhoneError(true)
     } else {
-      const res = await productService.register(email, password, name, genderNumber, allPhone);
-      console.log("res", res);
+      const res = await productService.register(email, password, name, genderNumber, allPhone)
+
       if (res.code === 200) {
-        sessionStorage.removeItem("temporarily_email");
-        alert("您已註冊成功, 開始挑選您的食物吧!");
-        history.push("/");
+        sessionStorage.removeItem('temporarily_email')
+        alert('您已註冊成功, 開始挑選您的食物吧!')
+        history.push('/')
       } else if (res.code === 422) {
-        alert("資料填寫有誤!");
-        res.errors.map(item => {
-          console.log("item", item);
+        alert('資料填寫有誤!')
+        res.errors.map((item) => {
           switch (item.param) {
-            case "email":
-              if (item.msg === "E-mail already in use") {
-                setEmailErrorMsg("您的電子信箱已存在, 請嘗試其他信箱或至登入頁點選忘記密碼功能鈕!!");
+            case 'email':
+              if (item.msg === 'E-mail already in use') {
+                setEmailErrorMsg('您的電子信箱已存在, 請嘗試其他信箱或至登入頁點選忘記密碼功能鈕!!')
               }
-              setEmailError(true);
-              break;
-            case "password":
-              setPasswordError(true);
-              break;
-            case "name":
-              setNameError(true);
-              break;
-            case "phone":
-              setPhoneError(true);
-              break;
+              setEmailError(true)
+              break
+            case 'password':
+              setPasswordError(true)
+              break
+            case 'name':
+              setNameError(true)
+              break
+            case 'phone':
+              setPhoneError(true)
+              break
             default:
-              console.log("You do not have any error!!");
-              break;
+              break
           }
-          return console.log("You should done this form!!");
-        });
+          return console.log('You should done this form!!')
+        })
       }
     }
-  };
+  }
   return (
     <Container maxWidth="lg">
       <Grid item xs={12} className={classes.container}>
@@ -268,7 +262,7 @@ function Register() {
                 name="email"
                 onChange={handleChangeEmail}
                 error={emailError}
-                value={email || ""}
+                value={email || ''}
               />
               <FormHelperText
                 className={clsx(classes.input, classes.errorText, { [classes.hide]: emailError === false })}
@@ -281,9 +275,9 @@ function Register() {
                 <InputLabel htmlFor="standard-adornment-password">password</InputLabel>
                 <Input
                   id="standard-adornment-password"
-                  type={newValues.showPassword ? "text" : "password"}
+                  type={newValues.showPassword ? 'text' : 'password'}
                   value={newValues.password}
-                  onChange={handlePasswordChange("password")}
+                  onChange={handlePasswordChange('password')}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -385,7 +379,7 @@ function Register() {
         </Grid>
       </Grid>
     </Container>
-  );
+  )
 }
 
-export default Register;
+export default Register

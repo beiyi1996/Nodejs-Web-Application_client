@@ -1,59 +1,58 @@
-import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import productService from "../services/productService";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import ErrorIcon from "@material-ui/icons/Error";
-import Header from "./Header";
-import Logo from "../images/logo.png";
+import React, { useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import productService from '../services/productService'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import ErrorIcon from '@material-ui/icons/Error'
+import Header from './Header'
+import Logo from '../images/logo.png'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    boxShadow: "1px 5px 15px 0px #DBDCE1",
-    height: "100%"
+    boxShadow: '1px 5px 15px 0px #DBDCE1',
+    height: '100%',
   },
   container: {
-    textAlign: "center"
+    textAlign: 'center',
   },
   logo: {
     // borderRadius: "50%",
-    marginTop: 50
+    marginTop: 50,
   },
   grid: {
-    width: "100%",
-    margin: "0 auto",
-    paddingTop: 30
+    width: '100%',
+    margin: '0 auto',
+    paddingTop: 30,
   },
   typography: {
-    fontFamily: "Microsoft JhengHei"
+    fontFamily: 'Microsoft JhengHei',
   },
   warning: {
-    backgroundColor: "#F9F7ED",
-    color: "#E07A5F",
+    backgroundColor: '#F9F7ED',
+    color: '#E07A5F',
     padding: 5,
-    lineHeight: 1.5
+    lineHeight: 1.5,
   },
   errorIcon: {
     fontSize: 18,
-    verticalAlign: "text-bottom",
-    marginRight: 5
-  }
-}));
+    verticalAlign: 'text-bottom',
+    marginRight: 5,
+  },
+}))
 
 function ForgotPassword() {
-  const classes = useStyles();
+  const classes = useStyles()
 
   useEffect(() => {
     async function forgetPassword() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const email = urlParams.get("email");
-      await productService.forgotPassword(email);
-      console.log("發送忘記密碼郵件!!!");
+      const urlParams = new URLSearchParams(window.location.search)
+      const email = urlParams.get('email')
+      await productService.forgotPassword(email)
     }
-    forgetPassword();
-  }, []);
+    forgetPassword()
+  }, [])
 
   return (
     <Container maxWidth="sm" className={classes.root}>
@@ -74,7 +73,7 @@ function ForgotPassword() {
         </Grid>
       </Grid>
     </Container>
-  );
+  )
 }
 
-export default ForgotPassword;
+export default ForgotPassword

@@ -1,57 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { Button } from "@material-ui/core";
-import Header from "./Header";
-import Logo from "../images/logo.png";
+import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+import { Button } from '@material-ui/core'
+import Header from './Header'
+import Logo from '../images/logo.png'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
-    fontFamily: "Microsoft JhengHei",
-    boxShadow: "1px 5px 15px 0px #DBDCE1",
-    height: "100%"
+    fontFamily: 'Microsoft JhengHei',
+    boxShadow: '1px 5px 15px 0px #DBDCE1',
+    height: '100%',
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
   logo: {},
   paperText: {
-    textAlign: "center",
-    boxShadow: "none",
-    margin: "0 auto",
-    width: "50%"
+    textAlign: 'center',
+    boxShadow: 'none',
+    margin: '0 auto',
+    width: '50%',
   },
   center: {
-    textAlign: "center"
+    textAlign: 'center',
   },
   buttonGrid: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginBottom: 10,
-    "& > a": {
-      textDecoration: "none"
-    }
+    '& > a': {
+      textDecoration: 'none',
+    },
   },
   button: {
-    margin: "10px 0",
-    fontFamily: "Microsoft JhengHei"
-  }
-}));
+    margin: '10px 0',
+    fontFamily: 'Microsoft JhengHei',
+  },
+}))
 
 function Completed() {
-  const classes = useStyles();
-  const [userName, setUserName] = useState("");
+  const classes = useStyles()
+  const [userName, setUserName] = useState('')
   useEffect(() => {
-    const user = sessionStorage.getItem("user") !== null ? JSON.parse(sessionStorage.getItem("user")) : {};
-    console.log("completed page user", user);
-    setUserName(user.member);
-  }, []);
+    const user = sessionStorage.getItem('user') !== null ? JSON.parse(sessionStorage.getItem('user')) : {}
+    setUserName(user.member)
+  }, [])
 
   return (
     <Container maxWidth="lg">
@@ -80,7 +79,7 @@ function Completed() {
         </Grid>
       </Grid>
     </Container>
-  );
+  )
 }
 
-export default Completed;
+export default Completed
