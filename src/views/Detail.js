@@ -350,14 +350,14 @@ function Detail() {
       <Slider {...settings} className={classes.slider}>
         <div className={classes.restaurantImage}>
           <LazyLoad>
-            <img src={`${Config.Serverdomain}/${image_path.main}`} alt="" />
+            <img src={`${Config.Serverdomain}${image_path.main}`} alt="" />
           </LazyLoad>
         </div>
         {image_path.products.map((item, idx) => {
           return (
             <div className={classes.restaurantImage} key={idx}>
               <LazyLoad>
-                <img src={`${Config.Serverdomain}/${item}`} alt="" />
+                <img src={`${Config.Serverdomain}${item}`} alt="" />
               </LazyLoad>
             </div>
           )

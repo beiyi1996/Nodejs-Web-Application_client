@@ -222,7 +222,9 @@ function Search() {
   const getRestaurant = useCallback(async () => {
     setURLParams(keyWord)
     let res = await productService.searchByKeyWord(keyWord)
-    setRestaurant(res.restaurants)
+    if (Object.keys(res).length > 0) {
+      setRestaurant(res.restaurants)
+    }
   }, [keyWord])
 
   useEffect(() => {
