@@ -3,6 +3,10 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react'
 import Skeleton from '@material-ui/lab/Skeleton'
 import MarkerIcon from './images/marker.png'
 
+const googleMapsAPIKey = {
+  key: 'AIzaSyDsfL7MkWt_Sh0i-UF_giYeOpXGPbM3Ews',
+}
+
 const GoogleMaps = ({ mapProps }) => {
   const [visible, setVisible] = useState(false)
   const [showingInfoWindow, setShowingInfoWindow] = useState(false)
@@ -78,5 +82,5 @@ const GoogleMaps = ({ mapProps }) => {
 }
 
 export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  apiKey: googleMapsAPIKey.key,
 })(GoogleMaps)
