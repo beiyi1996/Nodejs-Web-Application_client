@@ -58,16 +58,16 @@ const API = {
       .then((res) => console.log('forgetPassword res status', res.status))
       .catch((error) => console.log('Error:', error))
   },
-  modifiedPasswordGET: async (token) => {
-    return await fetch(`${Serverdomain}/modifiedpassword?token=${token}`, {
+  modifyPassword: async (token) => {
+    return await fetch(`${Serverdomain}/modifypassword?token=${token}`, {
       cache: 'no-cache',
     })
       .then((res) => res.json())
       .catch((error) => console.log('Error:', error))
   },
-  modifiedPasswordPOST: async (token, email, password) => {
+  changePassword: async (token, email, password) => {
     const data = { email, password }
-    return await fetch(`${Serverdomain}/modifiedpassword?token=${token}`, {
+    return await fetch(`${Serverdomain}/changepassword?token=${token}`, {
       method: 'POST',
       body: JSON.stringify(data),
       cache: 'no-cache',

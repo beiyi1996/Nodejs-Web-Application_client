@@ -88,7 +88,7 @@ function ModifiedPassword() {
       const urlParams = new URLSearchParams(window.location.search)
       const token = urlParams.get('token')
       setToken(token)
-      const res = await productService.modifiedPasswordGET(token)
+      const res = await productService.modifyPassword(token)
       if (res) {
         setEmail(res.email)
       } else {
@@ -128,7 +128,7 @@ function ModifiedPassword() {
       alert('密碼與確認密碼不同, 請再次確認')
       setPasswordError(true)
     } else {
-      let res = await productService.modifiedPasswordPOST(token, email, checkValues.password)
+      let res = await productService.changePassword(token, email, checkValues.password)
       if (res.code === 200) {
         alert('您已完成修改密碼!')
         history.push('/')
@@ -144,14 +144,14 @@ function ModifiedPassword() {
         </Grid>
         <Grid item xs={12} className={classes.formGrid}>
           <form className={classes.form} noValidate autoComplete="off">
-            <TextField label="email" name="email" disabled={true} value={email} className={classes.input} />
+            <TextField label="email" name="email" disabled={true} value={email || ''} className={classes.input} />
             <FormControl className={clsx(classes.margin, classes.textField, classes.input)}>
               <MuiThemeProvider theme={theme}>
                 <InputLabel htmlFor="standard-adornment-password">new password</InputLabel>
                 <Input
-                  id="standard-adornment-password"
+                  id="new-password"
                   type={newValues.showPassword ? 'text' : 'password'}
-                  value={newValues.password}
+                  value={newValues.password || ''}
                   onChange={handleChange('password')}
                   endAdornment={
                     <InputAdornment position="end">
@@ -173,9 +173,9 @@ function ModifiedPassword() {
               <MuiThemeProvider theme={theme}>
                 <InputLabel htmlFor="standard-adornment-password">check new password</InputLabel>
                 <Input
-                  id="standard-adornment-password"
+                  id="check-new-password"
                   type={checkValues.showPassword ? 'text' : 'password'}
-                  value={checkValues.password}
+                  value={checkValues.password || ''}
                   onChange={handleChangeCheckPassword('password')}
                   endAdornment={
                     <InputAdornment position="end">

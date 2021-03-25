@@ -73,7 +73,7 @@ function App() {
           <Route path="/completed">
             <Completed />
           </Route>
-          <Route path="/modifiedpassword">
+          <Route path="/modifypassword">
             <ModifiedPassword />
           </Route>
           <Route path="/forgotpassword">
