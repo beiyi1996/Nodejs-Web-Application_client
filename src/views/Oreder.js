@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    height: '100%',
+    maxHeight: '100vh',
     overflow: 'scroll',
     paddingBottom: 130,
     // marginLeft: -drawerWidth
@@ -186,7 +186,7 @@ function Orders() {
       sessionStorage.clear()
       history.push('/login')
     }
-  })
+  }, [history, restaurant])
 
   useEffect(() => {
     getAllOrders()

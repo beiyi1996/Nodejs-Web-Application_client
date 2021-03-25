@@ -61,9 +61,9 @@ const useStyles = makeStyles((theme) => ({
   },
   orders: {
     marginTop: 20,
-    maxHeight: 'calc(50% - 56px)',
+    maxHeight: 'calc(100% - 56px)',
     overflow: 'scroll',
-    paddingBottom: 100,
+    paddingBottom: 60,
     '& > *': {
       fontFamily: 'Microsoft JhengHei',
     },
@@ -147,9 +147,7 @@ function Member() {
         })
       })
 
-      console.log('promises', promises)
       Promise.all(promises).then(function (results) {
-        console.log(results)
         setOrders(results)
       })
 
